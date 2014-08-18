@@ -9,6 +9,7 @@
     "url": "https://github.com/yuanqing/fastmatter"
   },
   "devDependencies": {
+    "coveralls": "^2.11.1",
     "front-matter": "^0.2.0",
     "glob": "^4.0.5",
     "gulp": "^3.8.0",
