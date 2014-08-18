@@ -2,11 +2,11 @@
 
 > A faster frontmatter parser.
 
-(Faster relative to the [front-matter](https://github.com/jxson/front-matter) node module; see [Benchmark](#benchmark).)
+Fastmatter is faster than the [front-matter](https://github.com/jxson/front-matter) module because [it does not use regular expressions](https://github.com/yuanqing/fastmatter/blob/master/index.js). See [Benchmark](#benchmark).
 
 ## Usage
 
-Given a document `foo.md`:
+Given a document `foo.md` containing YAML frontmatter and content:
 
 ```md
 ---
@@ -64,7 +64,7 @@ $ npm i --save fastmatter
 
 ## Benchmark
 
-We compare Fastmatter (namely the `parse` method) against [front-matter](https://github.com/jxson/front-matter):
+We benchmark Fastmatter (namely, its `parse` method) against [front-matter](https://github.com/jxson/front-matter):
 
 ```bash
 $ git clone https://github.com/yuanqing/fastmatter.git
