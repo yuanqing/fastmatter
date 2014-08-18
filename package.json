@@ -1,0 +1,27 @@
+{
+  "name": "fastmatter",
+  "version": "0.1.0",
+  "description": "A faster frontmatter parser.",
+  "author": "Lim Yuan Qing",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuanqing/fastmatter"
+  },
+  "devDependencies": {
+    "front-matter": "^0.2.0",
+    "glob": "^4.0.5",
+    "gulp": "^3.8.0",
+    "gulp-istanbul": "^0.2.1",
+    "gulp-jasmine": "^0.3.0",
+    "gulp-jshint": "^1.8.2",
+    "gulp-plumber": "^0.6.4",
+    "gulp-rimraf": "^0.1.0",
+    "gulp-run": "^1.6.3",
+    "jshint-stylish": "^0.4.0",
+    "matcha": "^0.5.0"
+  },
+  "dependencies": {
+    "js-yaml": "^3.1.0"
+  }
+}
