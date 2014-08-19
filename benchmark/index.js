@@ -22,7 +22,7 @@ glob.sync(__dirname + '/fixtures/*.md').forEach(function(fixture) {
       fs.readFile(fixture, 'utf8', function(err, data) {
         if (err) throw err;
         str = data;
-        assert.deepEqual(frontmatter(str), fastmatter.parse(str)); // ensure parity
+        assert.deepEqual(frontmatter(str), fastmatter(str)); // ensure parity
         next();
       });
     });
@@ -32,7 +32,7 @@ glob.sync(__dirname + '/fixtures/*.md').forEach(function(fixture) {
     });
 
     bench('fastmatter', function() {
-      fastmatter.parse(str);
+      fastmatter(str);
     });
 
   });

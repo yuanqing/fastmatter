@@ -2,13 +2,13 @@
 
 > A faster frontmatter parser.
 
-Fastmatter is faster than the [front-matter](https://github.com/jxson/front-matter) module because [it does not use regular expressions](https://github.com/yuanqing/fastmatter/blob/master/index.js). See [Benchmark](#benchmark).
+Fastmatter is a drop-in replacement for the [front-matter](https://github.com/jxson/front-matter) node module. Fastmatter is faster because [it does not use regular expressions](https://github.com/yuanqing/fastmatter/blob/master/index.js). (See [Benchmark](#benchmark).)
 
 ## Usage
 
-Given a document `foo.md` containing YAML frontmatter and content:
+Given a document `example.md` containing YAML frontmatter and content:
 
-```md
+```
 ---
 title: Hello, World!
 tags: [ foo, bar, baz ]
@@ -19,9 +19,15 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit.
 &hellip;we can parse it like so:
 
 ```js
-fastmatter.parseFile('foo.md', function(err, parsed) {
+'use strict';
+
+var fs = require('fs');
+var fastmatter = require('./index.js');
+
+fs.readFile('./example.md', 'utf8', function(err, data) {
   if (err) throw err;
-  console.log(parsed);
+
+  fastmatter(data);
   /* =>
    * {
    *   attributes: {
@@ -36,23 +42,13 @@ fastmatter.parseFile('foo.md', function(err, parsed) {
 
 Fastmatter merely separates the YAML frontmatter from the document body. Actual parsing of the YAML is handled by [JS-YAML](https://github.com/nodeca/js-yaml).
 
-Note that there is also a `parse` method that takes a `string` instead of a file path
-
 ## API
 
-### fastmatter.parseFile(file, cb)
+### fastmatter(str)
 
-Parses the `file`.
+Parses `str`, and returns the parsed result.
 
-- `file` is the path to a text document.
-
-- The `parsed` result is returned via the `cb(err, parsed)` callback.
-
-### fastmatter.parse(str)
-
-Parses the `str` and returns the parsed result.
-
-- `str` is raw text containing YAML frontmatter and the document body.
+- `str` is raw text of the YAML frontmatter and the document body.
 
 ## Installation
 
@@ -64,7 +60,7 @@ $ npm i --save fastmatter
 
 ## Benchmark
 
-We benchmark Fastmatter (namely, its `parse` method) against [front-matter](https://github.com/jxson/front-matter):
+Run the [Matcha](https://github.com/logicalparadox/matcha) benchmark:
 
 ```bash
 $ git clone https://github.com/yuanqing/fastmatter.git

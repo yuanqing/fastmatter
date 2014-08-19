@@ -1,11 +1,8 @@
 'use strict';
 
-var fs = require('fs');
 var yamlParser = require('js-yaml');
 
-var fastmatter = {};
-
-fastmatter.parse = function(str) {
+var fastmatter = function(str) {
 
   var lines = str.split('\n');
 
@@ -40,17 +37,6 @@ fastmatter.parse = function(str) {
     attributes: attributes.length ? yamlParser.load(attributes.join('\n')) : {},
     body: lines.slice(i + 1).join('\n')
   };
-
-};
-
-fastmatter.parseFile = function(file, cb) {
-
-  var that = this;
-
-  fs.readFile(file, 'utf-8', function(err, data) {
-    if (err) return cb(err);
-    cb(null, that.parse(data));
-  });
 
 };
 

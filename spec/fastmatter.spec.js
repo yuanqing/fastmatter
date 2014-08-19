@@ -1,10 +1,9 @@
-/* globals describe, it, expect, jasmine */
+/* globals describe, it, expect */
 'use strict';
 
 var fastmatter = require('..');
-var fs = require('fs');
 
-describe('fastmatter.parse(str)', function() {
+describe('fastmatter(str)', function() {
 
   it('should parse the entire `str` as the body if the first line is not "---"', function() {
     var arr = [
@@ -13,7 +12,7 @@ describe('fastmatter.parse(str)', function() {
       '\n---\n---'
     ];
     arr.forEach(function(elem) {
-      expect(fastmatter.parse(elem)).toEqual({
+      expect(fastmatter(elem)).toEqual({
         attributes: {},
         body: elem
       });
@@ -26,7 +25,7 @@ describe('fastmatter.parse(str)', function() {
       '---\nfoo'
     ];
     arr.forEach(function(elem) {
-      expect(fastmatter.parse(elem)).toEqual({
+      expect(fastmatter(elem)).toEqual({
         attributes: {},
         body: elem
       });
@@ -39,7 +38,7 @@ describe('fastmatter.parse(str)', function() {
       '---\n---\n'
     ];
     arr.forEach(function(elem) {
-      expect(fastmatter.parse(elem)).toEqual({
+      expect(fastmatter(elem)).toEqual({
         attributes: {},
         body: ''
       });
@@ -47,14 +46,14 @@ describe('fastmatter.parse(str)', function() {
   });
 
   it('should parse frontmatter without body', function() {
-    expect(fastmatter.parse('---\nfoo: bar\n---')).toEqual({
+    expect(fastmatter('---\nfoo: bar\n---')).toEqual({
       attributes: { foo: 'bar' },
       body: ''
     });
   });
 
   it('should parse body without frontmatter', function() {
-    expect(fastmatter.parse('---\n---\nfoo')).toEqual({
+    expect(fastmatter('---\n---\nfoo')).toEqual({
       attributes: {},
       body: 'foo'
     });
@@ -66,33 +65,10 @@ describe('fastmatter.parse(str)', function() {
       ['---\nfoo: bar\n---\n\n', { foo: 'bar' }, '\n']
     ];
     arr.forEach(function(elem) {
-      expect(fastmatter.parse(elem[0])).toEqual({
+      expect(fastmatter(elem[0])).toEqual({
         attributes: elem[1],
         body: elem[2]
       });
-    });
-  });
-
-});
-
-describe('fastmatter.parseFile(file, cb)', function() {
-
-  it('should parse `file`, and return the results via the `cb` callback', function(done) {
-    fastmatter.parseFile(__dirname + '/fixtures/foo.md', function(err, data) {
-      expect(data).toEqual({
-        attributes: { foo: 'bar' },
-        body: 'baz\n'
-      });
-      done();
-    });
-  });
-
-  it('should return an `err` if `tmplFile` does not exist', function(done) {
-    var dummyFile = 'foo';
-    expect(fs.existsSync(dummyFile)).toBe(false);
-    fastmatter.parseFile(dummyFile, function(err) {
-      expect(err).toEqual(jasmine.any(Error));
-      done();
     });
   });
 
