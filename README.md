@@ -2,7 +2,7 @@
 
 > A faster frontmatter parser.
 
-Fastmatter is a drop-in replacement for the [front-matter](https://github.com/jxson/front-matter) node module. Fastmatter is faster because [it does not use regular expressions](https://github.com/yuanqing/fastmatter/blob/master/index.js). (See [Benchmark](#benchmark).)
+Fastmatter is a drop-in replacement for the [front-matter](https://github.com/jxson/front-matter) node module. Fastmatter is faster [because it does not use regular expressions](https://github.com/yuanqing/fastmatter/blob/master/index.js). (See [Benchmark](#benchmark).)
 
 ## Usage
 
@@ -21,8 +21,8 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit.
 ```js
 'use strict';
 
+var fastmatter = require('fastmatter');
 var fs = require('fs');
-var fastmatter = require('./index.js');
 
 fs.readFile('./example.md', 'utf8', function(err, data) {
   if (err) throw err;
