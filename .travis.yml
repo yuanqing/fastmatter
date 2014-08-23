@@ -5,8 +5,10 @@ node_js:
   - '0.11'
 
 script:
-  - ./node_modules/.bin/gulp
-  - ./node_modules/.bin/matcha
+  - npm run-script lint
+  - npm run-script cover
+  - npm run-script bench
 
 after_success:
+  - npm i coveralls
   - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls

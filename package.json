@@ -1,6 +1,6 @@
 {
   "name": "fastmatter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A faster frontmatter parser.",
   "author": "Lim Yuan Qing",
   "license": "MIT",
@@ -9,20 +9,29 @@
     "url": "https://github.com/yuanqing/fastmatter"
   },
   "devDependencies": {
-    "coveralls": "^2.11.1",
     "front-matter": "^0.2.0",
     "glob": "^4.0.5",
-    "gulp": "^3.8.0",
-    "gulp-istanbul": "^0.2.1",
-    "gulp-jasmine": "^0.3.0",
-    "gulp-jshint": "^1.8.2",
-    "gulp-plumber": "^0.6.4",
-    "gulp-rimraf": "^0.1.0",
-    "gulp-run": "^1.6.3",
+    "istanbul": "^0.3.0",
+    "jasmine-node": "^1.14.5",
+    "jshint": "^2.5.4",
     "jshint-stylish": "^0.4.0",
     "matcha": "^0.5.0"
   },
   "dependencies": {
     "js-yaml": "^3.1.0"
-  }
+  },
+  "scripts": {
+    "bench": "node_modules/.bin/matcha",
+    "cover": "node_modules/.bin/istanbul cover node_modules/.bin/jasmine-node ./spec -x **/spec/**",
+    "lint": "node_modules/.bin/jshint --verbose --reporter node_modules/jshint-stylish/stylish.js index.js",
+    "lint-bench": "node_modules/.bin/jshint --verbose --reporter node_modules/jshint-stylish/stylish.js ./benchmark/*.js",
+    "lint-test": "node_modules/.bin/jshint --verbose --reporter node_modules/jshint-stylish/stylish.js ./spec/*.js",
+    "test": "node_modules/.bin/jasmine-node spec --verbose"
+  },
+  "keywords": [
+    "yaml",
+    "frontmatter",
+    "markdown",
+    "static"
+  ]
 }

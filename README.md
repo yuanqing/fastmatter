@@ -60,14 +60,7 @@ $ npm i --save fastmatter
 
 ## Benchmark
 
-Run the [Matcha](https://github.com/logicalparadox/matcha) benchmark:
-
-```bash
-$ git clone https://github.com/yuanqing/fastmatter.git
-$ cd fastmatter
-$ npm install
-$ ./node_modules/.bin/matcha
-```
+Do `npm run-script bench` to run the [Matcha](https://github.com/logicalparadox/matcha) benchmark.
 
 ## License
 
