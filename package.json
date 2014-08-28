@@ -1,6 +1,6 @@
 {
   "name": "fastmatter",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "A faster frontmatter parser.",
   "author": "Lim Yuan Qing",
   "license": "MIT",
@@ -29,9 +29,13 @@
     "test": "node_modules/.bin/jasmine-node spec --verbose"
   },
   "keywords": [
-    "yaml",
+    "document",
+    "front-matter",
     "frontmatter",
     "markdown",
-    "static"
+    "parser",
+    "static",
+    "text",
+    "yaml"
   ]
 }

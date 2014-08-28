@@ -2,11 +2,11 @@
 
 > A faster frontmatter parser.
 
-Fastmatter is a drop-in replacement for the [front-matter](https://github.com/jxson/front-matter) node module. Fastmatter is faster [because it does not use regular expressions](https://github.com/yuanqing/fastmatter/blob/master/index.js). (See [Benchmark](#benchmark).)
+Fastmatter is faster than the [front-matter](https://github.com/jxson/front-matter) node module because [it does not use regular expressions](https://github.com/yuanqing/fastmatter/blob/master/index.js). (See [Benchmark](#benchmark).)
 
 ## Usage
 
-Given a document `example.md` containing YAML frontmatter and content:
+Given a document `foo.md` containing YAML frontmatter and content:
 
 ```
 ---
@@ -24,7 +24,7 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit.
 var fastmatter = require('fastmatter');
 var fs = require('fs');
 
-fs.readFile('./example.md', 'utf8', function(err, data) {
+fs.readFile('./foo.md', 'utf8', function(err, data) {
   if (err) throw err;
 
   fastmatter(data);
@@ -48,7 +48,7 @@ Fastmatter merely separates the YAML frontmatter from the document body. Actual 
 
 Parses `str`, and returns the parsed result.
 
-- `str` is raw text of the YAML frontmatter and the document body.
+- `str` contains the raw YAML frontmatter and the document body.
 
 ## Installation
 
@@ -60,7 +60,11 @@ $ npm i --save fastmatter
 
 ## Benchmark
 
-Do `npm run-script bench` to run the [Matcha](https://github.com/logicalparadox/matcha) benchmark.
+Run the [Matcha](https://github.com/logicalparadox/matcha) benchmark like so:
+
+```bash
+$ npm run bench
+```
 
 ## License
 
