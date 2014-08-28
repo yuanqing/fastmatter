@@ -2,23 +2,32 @@
 
 var yamlParser = require('js-yaml');
 
+var isSeparator = function(line) {
+
+  // the '---' separator can have trailing whitespace but not leading whitespace
+  return line[0] === '-' && line.trim() === '---';
+
+};
+
 var fastmatter = function(str) {
+
+  var bodyOnly = {
+    attributes: {},
+    body: str
+  };
 
   var lines = str.split('\n');
 
   // no attributes; entire `str` is body
-  if (lines[0].trim() !== '---') {
-    return {
-      attributes: {},
-      body: str
-    };
+  if (!isSeparator(lines[0])) {
+    return bodyOnly;
   }
 
   var attributes = [];
   var i = 1;
   var len = lines.length;
   while (i < len) {
-    if (lines[i].trim() === '---') { // end of attributes
+    if (isSeparator(lines[i])) { // end of attributes
       break;
     }
     attributes.push(lines[i]);
@@ -27,10 +36,7 @@ var fastmatter = function(str) {
 
   // second '---' is missing; assume entire `str` is body
   if (i === lines.length) {
-    return {
-      attributes: {},
-      body: str
-    };
+    return bodyOnly;
   }
 
   return {
