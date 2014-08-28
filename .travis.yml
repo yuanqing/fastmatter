@@ -5,11 +5,11 @@ node_js:
   - '0.11'
 
 script:
-  - npm run-script lint
-  - npm run-script lint-test
-  - npm run-script lint-bench
-  - npm run-script cover
-  - npm run-script bench
+  - npm run lint
+  - npm run lint-test
+  - npm run lint-bench
+  - npm run cover
+  - npm run bench
 
 after_success:
   - npm i coveralls
