@@ -13,7 +13,6 @@
     "glob": "^5.0.6",
     "istanbul": "^0.3.14",
     "jshint": "^2.7.0",
-    "jshint-stylish": "^1.0.2",
     "matcha": "^0.6.0",
     "minijasminenode2": "^1.0.0"
   },
@@ -24,13 +23,10 @@
     "through2": "^0.6.5"
   },
   "scripts": {
-    "bench": "node_modules/.bin/matcha",
-    "cover": "node_modules/.bin/istanbul cover node_modules/.bin/minijasminenode2 spec/*.js -x **/spec/**",
-    "lint": "npm run lint-bench && npm run lint-lib && npm run lint-test",
-    "lint-bench": "node_modules/.bin/jshint --verbose --reporter node_modules/jshint-stylish/stylish.js ./benchmark/*.js",
-    "lint-lib": "node_modules/.bin/jshint --verbose --reporter node_modules/jshint-stylish/stylish.js *.js",
-    "lint-test": "node_modules/.bin/jshint --verbose --reporter node_modules/jshint-stylish/stylish.js ./spec/*.js",
-    "test": "node_modules/.bin/minijasminenode2 spec/*.js --verbose"
+    "start": "npm run lint && npm test && npm run bench",
+    "lint": "jshint --verbose index.js spec/*.js benchmark/*.js",
+    "test": "istanbul cover -x **/spec/** -- minijasminenode2 spec/*.js --verbose",
+    "bench": "matcha"
   },
   "keywords": [
     "document",
@@ -39,6 +35,7 @@
     "markdown",
     "parser",
     "static",
+    "stream",
     "text",
     "yaml"
   ]
