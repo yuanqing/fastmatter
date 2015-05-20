@@ -44,7 +44,7 @@ fs.readFile('foo.md', 'utf8', function(err, data) {
 ```js
 'use strict';
 
-var fastmatter = require('..');
+var fastmatter = require('fastmatter');
 var fs = require('fs');
 var concat = require('concat-stream');
 
@@ -64,9 +64,7 @@ fs.createReadStream('foo.md')
   }));
 ```
 
-Note that `cb` is called with the frontmatter `attributes`, while the document `body` is simply passed through the stream. Also, the `this` context of `cb` is the stream itself; this is useful if we want to change the flow of the stream depending on the parsed `attributes`.
-
-(Note: Fastmatter merely separates the YAML frontmatter from the document body. Actual parsing of the YAML is handled by [JS-YAML](https://github.com/nodeca/js-yaml).)
+`cb` is called with the frontmatter `attributes`, while the document `body` is simply passed through the stream. Also note that the `this` context of `cb` is the stream itself; this is useful if we want to change the flow of the stream depending on the parsed `attributes`.
 
 ## API
 
