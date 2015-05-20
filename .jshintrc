@@ -1,20 +1,23 @@
 {
-  "node": true,
-  "browser": true,
+  "browser": false,
   "bitwise": true,
   "camelcase": true,
   "curly": false,
   "eqeqeq": true,
+  "eqnull": true,
   "freeze": true,
   "immed": true,
   "indent": 2,
-  "latedef": true,
+  "latedef": false,
   "newcap": true,
   "noarg": true,
-  "quotmark": false,
+  "node": true,
+  "quotmark": true,
   "undef": true,
   "unused": true,
   "globals": {
-    "define": true
+    "describe": true,
+    "expect": true,
+    "it": true
   }
 }

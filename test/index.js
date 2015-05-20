@@ -1,4 +1,3 @@
-/* globals describe, it, expect */
 'use strict';
 
 var fastmatter = require('..');
