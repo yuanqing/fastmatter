@@ -116,6 +116,13 @@ Results (as of May 2015) [via Travis-CI](https://travis-ci.org/yuanqing/fastmatt
   wait » fastmatter             132 op/s » fastmatter
 ```
 
+## Changelog
+
+- 1.1.0
+  - Add `fastmatter.stream`
+- 1.0.0
+  - First stable release
+
 ## License
 
 [MIT](https://github.com/yuanqing/fastmatter/blob/master/LICENSE)
