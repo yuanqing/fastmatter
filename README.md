@@ -1,8 +1,8 @@
-# Fastmatter.js [![npm Version](http://img.shields.io/npm/v/fastmatter.svg?style=flat)](https://www.npmjs.org/package/fastmatter) [![Build Status](https://img.shields.io/travis/yuanqing/fastmatter.svg?style=flat)](https://travis-ci.org/yuanqing/fastmatter) [![Coverage Status](https://img.shields.io/coveralls/yuanqing/fastmatter.svg?style=flat)](https://coveralls.io/r/yuanqing/fastmatter)
+# fastmatter.js [![npm Version](http://img.shields.io/npm/v/fastmatter.svg?style=flat)](https://www.npmjs.org/package/fastmatter) [![Build Status](https://img.shields.io/travis/yuanqing/fastmatter.svg?style=flat)](https://travis-ci.org/yuanqing/fastmatter) [![Coverage Status](https://img.shields.io/coveralls/yuanqing/fastmatter.svg?style=flat)](https://coveralls.io/r/yuanqing/fastmatter)
 
-> A faster frontmatter parser.
+> A faster frontmatter parser. Supports both string and stream inputs.
 
-Fastmatter is faster than the [front-matter](https://github.com/jxson/front-matter) node module because [it does not use regular expressions](https://github.com/yuanqing/fastmatter/blob/master/index.js). (See [Benchmark](#benchmark).)
+Fastmatter is faster than the [front-matter](https://github.com/jxson/front-matter) module because [fastmatter does not use regular expressions](https://github.com/yuanqing/fastmatter/blob/master/index.js). (See [Benchmark](#benchmark).)
 
 ## Usage
 
@@ -16,7 +16,7 @@ tags: [ foo, bar, baz ]
 Lorem ipsum dolor sit amet consectetur adipisicing elit.
 ```
 
-&hellip;we can parse it like so:
+&hellip;we can parse this document as a string, via [`fastmatter(str)`](#fastmatterstr):
 
 ```js
 'use strict';
@@ -24,9 +24,8 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit.
 var fastmatter = require('fastmatter');
 var fs = require('fs');
 
-fs.readFile('./foo.md', 'utf8', function(err, data) {
+fs.readFile('foo.md', 'utf8', function(err, data) {
   if (err) throw err;
-
   fastmatter(data);
   /* =>
    * {
@@ -40,32 +39,85 @@ fs.readFile('./foo.md', 'utf8', function(err, data) {
 });
 ```
 
-Fastmatter merely separates the YAML frontmatter from the document body. Actual parsing of the YAML is handled by [JS-YAML](https://github.com/nodeca/js-yaml).
+&hellip;or as a stream, via [`fastmatter.stream([cb])`](#fastmatterstreamcb):
+
+```js
+'use strict';
+
+var fastmatter = require('..');
+var fs = require('fs');
+var concat = require('concat-stream');
+
+fs.createReadStream('foo.md')
+  .pipe(fastmatter.stream(function(attributes) {
+    console.log(attributes);
+    /* =>
+     * {
+     *   title: 'Hello, World!',
+     *   tags: [ 'foo', 'bar', 'baz' ]
+     * }
+     */
+    this.pipe(concat(function(body) {
+      console.log(body.toString());
+      //=> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    }));
+  }));
+```
+
+Note that `cb` is called with the frontmatter `attributes`, while the document `body` is simply passed through the stream. Also, the `this` context of `cb` is the stream itself; this is useful if we want to change the flow of the stream depending on the parsed `attributes`.
+
+(Note: Fastmatter merely separates the YAML frontmatter from the document body. Actual parsing of the YAML is handled by [JS-YAML](https://github.com/nodeca/js-yaml).)
 
 ## API
 
+```js
+var fastmatter = require('fastmatter');
+```
+
 ### fastmatter(str)
 
-Parses `str`, and returns the parsed result.
+Parses the `str` and returns the parsed frontmatter `attributes` and document `body`.
 
-- `str` contains the raw YAML frontmatter and the document body.
+### fastmatter.stream([cb])
+
+Calls `cb` with the parsed frontmatter `attributes`. The `this` context of `cb` is the stream itself. The document `body` is passed through the stream.
 
 ## Installation
 
-Install via [npm](https://www.npmjs.org/package/fastmatter):
+Install via [npm](https://www.npmjs.org):
 
-```bash
+```
 $ npm i --save fastmatter
 ```
 
 ## Benchmark
 
-Run the [Matcha](https://github.com/logicalparadox/matcha) benchmark like so:
+Run the [Matcha](https://github.com/logicalparadox/matcha) benchmarks like so:
 
-```bash
-$ npm run bench
+```
+$ npm run benchmark
+```
+
+Results (as of May 2015) [via Travis-CI](https://travis-ci.org/yuanqing/fastmatter/jobs/63363139):
+
+```
+       1-baseline.md
+  wait » front-matter           392 op/s » front-matter
+  wait » fastmatter           9,564 op/s » fastmatter
+
+       2-more-frontmatter.md
+  wait » front-matter             3 op/s » front-matter
+  wait » fastmatter             107 op/s » fastmatter
+
+       3-more-body.md
+  wait » front-matter           434 op/s » front-matter
+  wait » fastmatter           3,392 op/s » fastmatter
+
+       4-more-frontmatter-and-body.md
+  wait » front-matter             2 op/s » front-matter
+  wait » fastmatter             132 op/s » fastmatter
 ```
 
 ## License
 
-[MIT license](https://github.com/yuanqing/fastmatter/blob/master/LICENSE)
+[MIT](https://github.com/yuanqing/fastmatter/blob/master/LICENSE)
