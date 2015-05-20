@@ -23,7 +23,7 @@
     "through2": "^0.6.5"
   },
   "scripts": {
-    "start": "npm run lint && npm test && npm run bench",
+    "start": "npm run lint && npm test && npm run benchmark",
     "lint": "jshint --verbose index.js test/*.js benchmark/*.js",
     "test": "istanbul cover -- minijasminenode2 test/*.js --verbose",
     "benchmark": "matcha"
