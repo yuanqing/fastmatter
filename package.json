@@ -9,12 +9,14 @@
     "url": "https://github.com/yuanqing/fastmatter"
   },
   "devDependencies": {
+    "concat-stream": "^1.4.8",
     "front-matter": "^1.0.0",
     "glob": "^5.0.6",
     "istanbul": "^0.3.14",
     "jshint": "^2.7.0",
     "matcha": "^0.6.0",
-    "minijasminenode2": "^1.0.0"
+    "minijasminenode2": "^1.0.0",
+    "savoy": "^0.3.0"
   },
   "dependencies": {
     "js-yaml": "^3.3.1",

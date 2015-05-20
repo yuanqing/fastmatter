@@ -13,6 +13,8 @@ var isSeparator = function(line) {
 
 };
 
+var NEWLINE = '\n';
+
 var fastmatter = function(str) {
 
   var bodyOnly = {
@@ -20,10 +22,9 @@ var fastmatter = function(str) {
     body: str
   };
 
-  var lines = str.split('\n');
+  var lines = str.split(NEWLINE);
 
-  // no attributes; entire `str` is body
-  if (!isSeparator(lines[0])) {
+  if (!isSeparator(lines[0])) { // no attributes; entire `str` is body
     return bodyOnly;
   }
 
@@ -38,48 +39,75 @@ var fastmatter = function(str) {
     i += 1;
   }
 
-  // second '---' is missing; assume entire `str` is body
-  if (i === lines.length) {
+  if (i === lines.length) { // second '---' is missing; assume entire `str` is body
     return bodyOnly;
   }
 
   return {
-    attributes: attributes.length ? jsYaml(attributes.join('\n')) : {},
-    body: lines.slice(i + 1).join('\n')
+    attributes: attributes.length ? jsYaml(attributes.join(NEWLINE)) : {},
+    body: lines.slice(i + 1).join(NEWLINE)
   };
 
 };
+
+var SPLIT_REGEX = /(\n)/;
 
 fastmatter.stream = function(cb) {
 
   cb = cb || noop;
 
-  var flag = 0;
+  var isFirstLine = true;
+  var bodyFlag = 0;
+  var firstSeparator = '';
   var attributes = [];
 
   var transform = function(chunk, encoding, transformCb) {
-    var line = chunk.toString('utf8');
-    if (flag === 2) {
-      this.push(line); // pipe the `body` through
-      return transformCb();
-    }
-    if (isSeparator(line)) {
-      if (flag === 0) {
-        // encountered the first '---'
-        flag = 1;
+    var line = chunk.toString();
+    if (bodyFlag === 0) { // not in `body`
+      if (isFirstLine) {
+        isFirstLine = false;
+        if (isSeparator(line)) { // start of `attributes`
+          firstSeparator = line; // we need this if the second '---' is missing
+        } else { // no attributes; the entire stream is `body`
+          bodyFlag = 2; // the next line is the second line of `body`
+          cb.bind(this)({});
+          cb = noop;
+          this.push(line);
+        }
       } else {
-        // encountered the second '---', ie. end of `attributes`
-        flag = 2;
-        cb.bind(this)(jsYaml(attributes.join('\n')));
+        if (isSeparator(line)) {
+          bodyFlag = 1; // the next line is the first line of `body`
+          cb.bind(this)(jsYaml(attributes.join('')) || {});
+          cb = noop;
+          firstSeparator = '';
+          attributes = [];
+        } else {
+          attributes.push(line);
+        }
       }
-    } else {
-      attributes.push(line);
+    } else { // in `body`
+      if (bodyFlag === 1) {
+        bodyFlag = 2; // the next line is the second line of `body`
+        line = line.substring(1); // drop the initial '\n'
+      }
+      this.push(line);
     }
     transformCb();
   };
 
-  return combine(split(), through(transform));
+  var flush = function(flushCb) {
+    cb.bind(this)({});
+    if (firstSeparator.length) {
+      this.push(firstSeparator);
+    }
+    if (attributes.length) {
+      this.push(attributes.join(''));
+    }
+    flushCb();
+  };
+
+  return combine(split(SPLIT_REGEX), through(transform, flush));
 
 };
 
-exports = module.exports = fastmatter;
+module.exports = fastmatter;
