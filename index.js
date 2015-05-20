@@ -1,6 +1,10 @@
 'use strict';
 
-var yamlParser = require('js-yaml');
+var combine = require('stream-combiner');
+var jsYaml = require('js-yaml').load;
+var noop = function() {};
+var split = require('split');
+var through = require('through2');
 
 var isSeparator = function(line) {
 
@@ -40,9 +44,41 @@ var fastmatter = function(str) {
   }
 
   return {
-    attributes: attributes.length ? yamlParser.load(attributes.join('\n')) : {},
+    attributes: attributes.length ? jsYaml(attributes.join('\n')) : {},
     body: lines.slice(i + 1).join('\n')
   };
+
+};
+
+fastmatter.stream = function(cb) {
+
+  cb = cb || noop;
+
+  var flag = 0;
+  var attributes = [];
+
+  var transform = function(chunk, encoding, transformCb) {
+    var line = chunk.toString('utf8');
+    if (flag === 2) {
+      this.push(line); // pipe the `body` through
+      return transformCb();
+    }
+    if (isSeparator(line)) {
+      if (flag === 0) {
+        // encountered the first '---'
+        flag = 1;
+      } else {
+        // encountered the second '---', ie. end of `attributes`
+        flag = 2;
+        cb.bind(this)(jsYaml(attributes.join('\n')));
+      }
+    } else {
+      attributes.push(line);
+    }
+    transformCb();
+  };
+
+  return combine(split(), through(transform));
 
 };
 
