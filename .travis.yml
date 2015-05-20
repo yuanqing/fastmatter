@@ -3,11 +3,10 @@ language: node_js
 node_js:
   - '0.10'
   - '0.11'
+  - 'iojs'
 
 script:
-  - npm run lint
-  - npm run cover
-  - npm run bench
+  - npm start
 
 after_success:
   - npm i coveralls
