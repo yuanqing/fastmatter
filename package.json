@@ -12,10 +12,10 @@
     "front-matter": "^1.0.0",
     "glob": "^5.0.6",
     "istanbul": "^0.3.14",
-    "jasmine-node": "^1.14.5",
     "jshint": "^2.7.0",
     "jshint-stylish": "^1.0.2",
-    "matcha": "^0.6.0"
+    "matcha": "^0.6.0",
+    "minijasminenode2": "^1.0.0"
   },
   "dependencies": {
     "js-yaml": "^3.3.1",
@@ -25,12 +25,12 @@
   },
   "scripts": {
     "bench": "node_modules/.bin/matcha",
-    "cover": "node_modules/.bin/istanbul cover node_modules/.bin/jasmine-node ./spec -x **/spec/**",
+    "cover": "node_modules/.bin/istanbul cover node_modules/.bin/minijasminenode2 spec/*.js -x **/spec/**",
     "lint": "npm run lint-bench && npm run lint-lib && npm run lint-test",
     "lint-bench": "node_modules/.bin/jshint --verbose --reporter node_modules/jshint-stylish/stylish.js ./benchmark/*.js",
     "lint-lib": "node_modules/.bin/jshint --verbose --reporter node_modules/jshint-stylish/stylish.js *.js",
     "lint-test": "node_modules/.bin/jshint --verbose --reporter node_modules/jshint-stylish/stylish.js ./spec/*.js",
-    "test": "node_modules/.bin/jasmine-node spec --verbose"
+    "test": "node_modules/.bin/minijasminenode2 spec/*.js --verbose"
   },
   "keywords": [
     "document",
