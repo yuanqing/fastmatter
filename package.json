@@ -9,16 +9,16 @@
     "url": "https://github.com/yuanqing/fastmatter"
   },
   "devDependencies": {
-    "front-matter": "^0.2.0",
-    "glob": "^4.0.5",
-    "istanbul": "^0.3.0",
+    "front-matter": "^1.0.0",
+    "glob": "^5.0.6",
+    "istanbul": "^0.3.14",
     "jasmine-node": "^1.14.5",
-    "jshint": "^2.5.4",
-    "jshint-stylish": "^0.4.0",
-    "matcha": "^0.5.0"
+    "jshint": "^2.7.0",
+    "jshint-stylish": "^1.0.2",
+    "matcha": "^0.6.0"
   },
   "dependencies": {
-    "js-yaml": "^3.1.0",
+    "js-yaml": "^3.3.1",
     "split": "^0.3.3",
     "stream-combiner": "^0.2.1",
     "through2": "^0.6.5"
