@@ -70,14 +70,14 @@ fastmatter.stream = function(cb) {
           firstSeparator = line; // we need this if the second '---' is missing
         } else { // no attributes; the entire stream is `body`
           bodyFlag = 2; // the next line is the second line of `body`
-          cb.bind(this)({});
+          cb.call(this, {});
           cb = noop;
           this.push(line);
         }
       } else {
         if (isSeparator(line)) {
           bodyFlag = 1; // the next line is the first line of `body`
-          cb.bind(this)(jsYaml(attributes.join('')) || {});
+          cb.call(this, jsYaml(attributes.join('')) || {});
           cb = noop;
           firstSeparator = '';
           attributes = [];
@@ -96,7 +96,7 @@ fastmatter.stream = function(cb) {
   };
 
   var flush = function(flushCb) {
-    cb.bind(this)({});
+    cb.call(this, {});
     if (firstSeparator.length) {
       this.push(firstSeparator);
     }
