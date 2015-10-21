@@ -1,8 +1,8 @@
-# fastmatter.js [![npm Version](http://img.shields.io/npm/v/fastmatter.svg?style=flat)](https://www.npmjs.org/package/fastmatter) [![Build Status](https://img.shields.io/travis/yuanqing/fastmatter.svg?style=flat)](https://travis-ci.org/yuanqing/fastmatter) [![Coverage Status](https://img.shields.io/coveralls/yuanqing/fastmatter.svg?style=flat)](https://coveralls.io/r/yuanqing/fastmatter)
+# fastmatter.js [![npm Version](http://img.shields.io/npm/v/fastmatter.svg?style=flat)](https://www.npmjs.org/package/fastmatter) [![Build Status](https://img.shields.io/travis/yuanqing/fastmatter.svg?branch=master&style=flat)](https://travis-ci.org/yuanqing/fastmatter) [![Coverage Status](https://img.shields.io/coveralls/yuanqing/fastmatter.svg?style=flat)](https://coveralls.io/r/yuanqing/fastmatter)
 
 > A faster frontmatter parser. Supports both string and stream inputs.
 
-Fastmatter is faster than the [front-matter](https://github.com/jxson/front-matter) module because [fastmatter does not use regular expressions](https://github.com/yuanqing/fastmatter/blob/master/index.js). (See [Benchmark](#benchmark).)
+Fastmatter is faster than the [front-matter](https://github.com/jxson/front-matter) module because fastmatter [does not use regular expressions](index.js). (See [Benchmark](#benchmark).)
 
 ## Usage
 
@@ -96,24 +96,24 @@ Run the [Matcha](https://github.com/logicalparadox/matcha) benchmarks like so:
 $ npm run benchmark
 ```
 
-Results (as of May 2015) [via Travis-CI](https://travis-ci.org/yuanqing/fastmatter/jobs/63363139):
+Results (as of October 2015) [via Travis-CI](https://travis-ci.org/yuanqing/fastmatter/jobs/86626296):
 
 ```
-       1-baseline.md
-  wait » front-matter           392 op/s » front-matter
-  wait » fastmatter           9,564 op/s » fastmatter
+     1-baseline.md
+wait » front-matter             391 op/s » front-matter
+wait » fastmatter          14,400 op/s » fastmatter
 
-       2-more-frontmatter.md
-  wait » front-matter             3 op/s » front-matter
-  wait » fastmatter             107 op/s » fastmatter
+     2-more-frontmatter.md
+wait » front-matter               3 op/s » front-matter
+wait » fastmatter             176 op/s » fastmatter
 
-       3-more-body.md
-  wait » front-matter           434 op/s » front-matter
-  wait » fastmatter           3,392 op/s » fastmatter
+     3-more-body.md
+wait » front-matter             489 op/s » front-matter
+wait » fastmatter           4,669 op/s » fastmatter
 
-       4-more-frontmatter-and-body.md
-  wait » front-matter             2 op/s » front-matter
-  wait » fastmatter             132 op/s » fastmatter
+     4-more-frontmatter-and-body.md
+wait » front-matter               3 op/s » front-matter
+wait » fastmatter             199 op/s » fastmatter
 ```
 
 ## Changelog
@@ -125,4 +125,4 @@ Results (as of May 2015) [via Travis-CI](https://travis-ci.org/yuanqing/fastmatt
 
 ## License
 
-[MIT](https://github.com/yuanqing/fastmatter/blob/master/LICENSE)
+[MIT](LICENSE.md)
