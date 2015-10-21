@@ -1,12 +1,16 @@
+notifications:
+  email: false
+
 language: node_js
 
 node_js:
-  - '0.10'
-  - '0.11'
-  - 'iojs'
+  - '0.12'
+  - '4.0'
 
 script:
-  - npm start
+  - npm run lint
+  - npm test
+  - npm run benchmark
 
 after_success:
   - npm i coveralls
