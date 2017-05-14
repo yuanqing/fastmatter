@@ -10,6 +10,7 @@ node_js:
 script:
   - yarn run lint
   - yarn run coverage
+  - yarn run benchmark
 
 after_success:
   - yarn add --dev coveralls
