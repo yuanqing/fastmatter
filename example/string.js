@@ -1,11 +1,11 @@
-'use strict';
+const fastmatter = require('..')
+const fs = require('fs')
 
-var fastmatter = require('..');
-var fs = require('fs');
-
-fs.readFile('foo.md', 'utf8', function(err, data) {
-  if (err) throw err;
-  console.log(fastmatter(data));
+fs.readFile('foo.md', 'utf8', function (error, data) {
+  if (error) {
+    throw err
+  }
+  console.log(fastmatter(data))
   /* =>
    * {
    *   attributes: {
@@ -15,4 +15,4 @@ fs.readFile('foo.md', 'utf8', function(err, data) {
    *   body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
    * }
    */
-});
+})

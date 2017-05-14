@@ -1,40 +1,22 @@
-/* globals suite, set, before, bench */
+const Benchmark = require('benchmark')
+const frontmatter = require('front-matter')
+const fs = require('fs')
+const glob = require('glob')
 
-'use strict';
+const fastmatter = require('..')
 
-var assert = require('assert');
-var fs = require('fs');
-var glob = require('glob');
-var path = require('path');
-
-var frontmatter = require('front-matter');
-var fastmatter = require('..');
-
-glob.sync(__dirname + '/fixtures/*.md').forEach(function(fixture) {
-
-  suite(path.basename(fixture), function() {
-
-    var str;
-
-    set('iterations', 100);
-
-    before(function(next) {
-      fs.readFile(fixture, 'utf8', function(err, data) {
-        if (err) throw err;
-        str = data;
-        assert.deepEqual(frontmatter(str), fastmatter(str)); // ensure parity
-        next();
-      });
-    });
-
-    bench('front-matter', function() {
-      frontmatter(str);
-    });
-
-    bench('fastmatter', function() {
-      fastmatter(str);
-    });
-
-  });
-
-});
+glob.sync(__dirname + '/fixtures/*.md').forEach(function (fixture) {
+  const string = fs.readFileSync(fixture, 'utf8')
+  const suite = new Benchmark.Suite()
+  suite
+    .add('fastmatter', function () {
+      fastmatter(string)
+    })
+    .add('frontmatter', function () {
+      frontmatter(string)
+    })
+    .on('complete', function () {
+      console.log('Fastest is ' + this.filter('fastest').map('name'))
+    })
+    .run({ async: true })
+})

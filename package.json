@@ -8,26 +8,27 @@
     "type": "git",
     "url": "https://github.com/yuanqing/fastmatter"
   },
-  "devDependencies": {
-    "concat-stream": "^1.5.1",
-    "front-matter": "^2.0.0",
-    "glob": "^5.0.15",
-    "istanbul": "^0.4.0",
-    "jshint": "^2.8.0",
-    "matcha": "^0.6.0",
-    "minijasminenode2": "^1.0.0",
-    "savoy": "^0.3.1"
-  },
   "dependencies": {
     "js-yaml": "^3.4.3",
     "split": "^1.0.0",
     "stream-combiner": "^0.2.2",
     "through2": "^2.0.0"
   },
+  "devDependencies": {
+    "benchmark": "^2.1.4",
+    "concat-stream": "^1.6.0",
+    "front-matter": "^2.1.2",
+    "glob": "^7.1.1",
+    "istanbul": "^0.4.5",
+    "prettier-standard": "^5.0.0",
+    "tape": "^4.6.3"
+  },
   "scripts": {
-    "lint": "jshint --verbose index.js test/*.js benchmark/*.js",
-    "test": "istanbul cover -- minijasminenode2 test/*.js --verbose",
-    "benchmark": "matcha"
+    "benchmark": "node benchmark/index.js",
+    "clean": "rimraf coverage",
+    "coverage": "istanbul cover -- tape test/*.js",
+    "lint": "prettier-standard *.js **/*.js",
+    "test": "tape test/*.js"
   },
   "keywords": [
     "document",

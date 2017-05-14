@@ -1,0 +1,191 @@
+{
+  "treats the entire `string` as the `body` if the first line is not '---'": [
+    {
+      "input": "",
+      "output": {
+        "attributes": {},
+        "body": ""
+      }
+    },
+    {
+      "input": "foo",
+      "output": {
+        "attributes": {},
+        "body": "foo"
+      }
+    },
+    {
+      "input": "\n---\n---",
+      "output": {
+        "attributes": {},
+        "body": "\n---\n---"
+      }
+    },
+    {
+      "input": " ---\nfoo: bar\n---\nbaz",
+      "output": {
+        "attributes": {},
+        "body": " ---\nfoo: bar\n---\nbaz"
+      }
+    }
+  ],
+  "treats the entire `string` as the `body` if the second '---' is missing": [
+    {
+      "input": "---",
+      "output": {
+        "attributes": {},
+        "body": "---"
+      }
+    },
+    {
+      "input": "---\n",
+      "output": {
+        "attributes": {},
+        "body": "---\n"
+      }
+    },
+    {
+      "input": "---\nfoo",
+      "output": {
+        "attributes": {},
+        "body": "---\nfoo"
+      }
+    },
+    {
+      "input": "---\n ---",
+      "output": {
+        "attributes": {},
+        "body": "---\n ---"
+      }
+    },
+    {
+      "input": "---\nfoo: bar\n ---\nbaz",
+      "output": {
+        "attributes": {},
+        "body": "---\nfoo: bar\n ---\nbaz"
+      }
+    }
+  ],
+  "handle empty `attributes` and `body`": [
+    {
+      "input": "---\n---",
+      "output": {
+        "attributes": {},
+        "body": ""
+      }
+    },
+    {
+      "input": "---\n---\n",
+      "output": {
+        "attributes": {},
+        "body": ""
+      }
+    },
+    {
+      "input": "--- \n--- ",
+      "output": {
+        "attributes": {},
+        "body": ""
+      }
+    },
+    {
+      "input": "--- \n--- \n",
+      "output": {
+        "attributes": {},
+        "body": ""
+      }
+    }
+  ],
+  "parse `attributes` without `body`": [
+    {
+      "input": "---\nfoo: bar\n---",
+      "output": {
+        "attributes": {
+          "foo": "bar"
+        },
+        "body": ""
+      }
+    },
+    {
+      "input": "---\nfoo: bar\n---\n",
+      "output": {
+        "attributes": {
+          "foo": "bar"
+        },
+        "body": ""
+      }
+    },
+    {
+      "input": "--- \nfoo: bar\n--- ",
+      "output": {
+        "attributes": {
+          "foo": "bar"
+        },
+        "body": ""
+      }
+    },
+    {
+      "input": "--- \nfoo: bar\n--- \n",
+      "output": {
+        "attributes": {
+          "foo": "bar"
+        },
+        "body": ""
+      }
+    }
+  ],
+  "parse `body` without `attributes`": [
+    {
+      "input": "---\n---\nfoo",
+      "output": {
+        "attributes": {},
+        "body": "foo"
+      }
+    },
+    {
+      "input": "--- \n--- \nfoo",
+      "output": {
+        "attributes": {},
+        "body": "foo"
+      }
+    }
+  ],
+  "parse both `attributes` and `body`": [
+    {
+      "input": "---\nfoo: bar\n---\nbaz",
+      "output": {
+        "attributes": {
+          "foo": "bar"
+        },
+        "body": "baz"
+      }
+    },
+    {
+      "input": "---\nfoo: bar\n---\n\n",
+      "output": {
+        "attributes": {
+          "foo": "bar"
+        },
+        "body": "\n"
+      }
+    },
+    {
+      "input": "--- \nfoo: bar\n--- \nbaz",
+      "output": {
+        "attributes": {
+          "foo": "bar"
+        },
+        "body": "baz"
+      }
+    },
+    {
+      "input": "--- \nfoo: bar\n--- \n\n",
+      "output": {
+        "attributes": {
+          "foo": "bar"
+        },
+        "body": "\n"
+      }
+    }
+  ]
+}
