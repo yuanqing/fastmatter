@@ -21,7 +21,8 @@
     "glob": "^7.1.1",
     "istanbul": "^0.4.5",
     "prettier-standard": "^5.0.0",
-    "tape": "^4.6.3"
+    "tape": "^4.6.3",
+    "yaml-front-matter": "^3.4.0"
   },
   "scripts": {
     "benchmark": "node benchmark/index.js",

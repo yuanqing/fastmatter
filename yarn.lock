@@ -262,6 +262,10 @@ color-name@^1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.2.tgz#5c8ab72b64bd2215d617ae9559ebb148475cf98d"
 
+commander@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-1.0.0.tgz#5e6a88e7070ff5908836ead19169548c30f90bcd"
+
 common-tags@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.4.0.tgz#1187be4f3d4cf0c0427d43f74eef1f73501614c0"
@@ -912,7 +916,7 @@ js-tokens@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.1.tgz#08e9f132484a2c45a30907e9dc4d5567b7f114d7"
 
-js-yaml@3.x, js-yaml@^3.4.3, js-yaml@^3.4.6, js-yaml@^3.5.1:
+js-yaml@3.x, js-yaml@^3.4.3, js-yaml@^3.4.6, js-yaml@^3.5.1, js-yaml@^3.5.2:
   version "3.8.4"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.8.4.tgz#520b4564f86573ba96662af85a8cafa7b4b5a6f6"
   dependencies:
@@ -1381,7 +1385,7 @@ right-align@^0.1.1:
   dependencies:
     align-text "^0.1.1"
 
-rimraf@^2.2.8, rimraf@^2.6.1:
+rimraf@^2.2.8:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.1.tgz#c2338ec643df7a1b7fe5c54fa86f57428a55f33d"
   dependencies:
@@ -1670,6 +1674,13 @@ write@^0.2.1:
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
+
+yaml-front-matter@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/yaml-front-matter/-/yaml-front-matter-3.4.0.tgz#c4bb5c41e8797fef584b1872cc052cdc26210dca"
+  dependencies:
+    commander "1.0.0"
+    js-yaml "^3.5.2"
 
 yargs@~3.10.0:
   version "3.10.0"
