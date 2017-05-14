@@ -2,7 +2,7 @@
 
 > A faster frontmatter parser. Supports both string and stream inputs.
 
-Fastmatter is faster than the [front-matter](https://github.com/jxson/front-matter) module because fastmatter [does not use regular expressions](index.js). (See [Benchmark](#benchmark).)
+Fastmatter is faster than the [front-matter](https://github.com/jxson/front-matter) module because fastmatter [does not use regular expressions](index.js).
 
 ## Usage
 
@@ -16,7 +16,7 @@ tags: [ foo, bar, baz ]
 Lorem ipsum dolor sit amet consectetur adipisicing elit.
 ```
 
-&hellip;we can parse this document as a string, via [`fastmatter(str)`](#fastmatterstr):
+&hellip;we can parse this document as a string, via [`fastmatter(string)`](#fastmatterstring):
 
 ```js
 const fastmatter = require('..')
@@ -97,7 +97,6 @@ Or [npm](https://npmjs.com):
 ```bash
 $ npm install --save fastmatter
 ```
-
 
 ## License
 
