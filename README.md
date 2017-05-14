@@ -19,7 +19,7 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit.
 &hellip;we can parse this document as a string, via [`fastmatter(string)`](#fastmatterstring):
 
 ```js
-const fastmatter = require('..')
+const fastmatter = require('fastmatter')
 const fs = require('fs')
 const concat = require('concat-stream')
 
@@ -45,7 +45,7 @@ fs.createReadStream('foo.md').pipe(
 &hellip;or as a stream, via [`fastmatter.stream([callback])`](#fastmatterstreamcallback):
 
 ```js
-const fastmatter = require('..')
+const fastmatter = require('fastmatter')
 const fs = require('fs')
 const concat = require('concat-stream')
 
@@ -73,7 +73,7 @@ fs.createReadStream('foo.md').pipe(
 ## API
 
 ```js
-var fastmatter = require('fastmatter');
+const fastmatter = require('fastmatter');
 ```
 
 ### fastmatter(string)
