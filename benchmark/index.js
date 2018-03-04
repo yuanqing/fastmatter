@@ -2,11 +2,12 @@ const Benchmark = require('benchmark')
 const frontmatter = require('front-matter')
 const fs = require('fs')
 const glob = require('glob')
+const path = require('path')
 const yamlFrontMatter = require('yaml-front-matter').loadFront
 
 const fastmatter = require('..')
 
-glob.sync(__dirname + '/fixtures/*.md').forEach(function (fixture) {
+glob.sync(path.join(__dirname, 'fixtures', '*.md')).forEach(function (fixture) {
   const string = fs.readFileSync(fixture, 'utf8')
   const suite = new Benchmark.Suite()
   suite

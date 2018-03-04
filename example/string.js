@@ -3,7 +3,7 @@ const fs = require('fs')
 
 fs.readFile('foo.md', 'utf8', function (error, data) {
   if (error) {
-    throw err
+    throw error
   }
   console.log(fastmatter(data))
   /* =>

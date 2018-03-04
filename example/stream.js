@@ -14,7 +14,7 @@ fs.createReadStream('foo.md').pipe(
     this.pipe(
       concat(function (body) {
         console.log(body.toString())
-        //=> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        // => Lorem ipsum dolor sit amet consectetur adipisicing elit.
       })
     )
   })
