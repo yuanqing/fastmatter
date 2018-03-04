@@ -1,35 +1,35 @@
-var combine = require('stream-combiner')
-var jsYaml = require('js-yaml').load
-var split = require('split')
-var through = require('through2')
+const combine = require('stream-combiner')
+const jsYaml = require('js-yaml').load
+const split = require('split')
+const through = require('through2')
 
-var isSeparator = function (line) {
+function isSeparator (line) {
   // the '---' separator can have trailing whitespace but not leading whitespace
   return line[0] === '-' && line.trim() === '---'
 }
 
-var NEWLINE = '\n'
+const NEWLINE = '\n'
 
-var fastmatter = function (string) {
+function fastmatter (string) {
   if (typeof string !== 'string') {
     throw new Error('Need a string')
   }
 
-  var bodyOnly = {
+  const bodyOnly = {
     attributes: {},
     body: string
   }
 
-  var lines = string.split(NEWLINE)
+  const lines = string.split(NEWLINE)
 
   if (!isSeparator(lines[0])) {
     // no attributes; entire `string` is body
     return bodyOnly
   }
 
-  var attributes = []
-  var i = 1
-  var len = lines.length
+  const attributes = []
+  const len = lines.length
+  let i = 1
   while (i < len) {
     if (isSeparator(lines[i])) {
       // end of attributes
@@ -50,19 +50,20 @@ var fastmatter = function (string) {
   }
 }
 
-var SPLIT_REGEX = /(\n)/
+const SPLIT_REGEX = /(\n)/
 
-var noop = function () {}
+function noop () {}
+
 fastmatter.stream = function (callback) {
   callback = callback || noop
 
-  var isFirstLine = true
-  var bodyFlag = 0
-  var firstSeparator = ''
-  var attributes = []
+  let isFirstLine = true
+  let bodyFlag = 0
+  let firstSeparator = ''
+  let attributes = []
 
-  var transform = function (chunk, encoding, transformCallback) {
-    var line = chunk.toString()
+  function transform (chunk, encoding, transformCallback) {
+    let line = chunk.toString()
     if (bodyFlag === 0) {
       // not in `body`
       if (isFirstLine) {
@@ -99,7 +100,7 @@ fastmatter.stream = function (callback) {
     transformCallback()
   }
 
-  var flush = function (flushCallback) {
+  function flush (flushCallback) {
     callback.call(this, {})
     if (firstSeparator.length) {
       this.push(firstSeparator)
