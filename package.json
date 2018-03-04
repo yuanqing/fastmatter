@@ -29,7 +29,7 @@
   "scripts": {
     "benchmark": "node benchmark/index.js",
     "clean": "rm -rf coverage",
-    "coverage": "rm -rf coverage && nyc npm test && nyc report --reporter=lcov --reporter=html",
+    "coverage": "yarn clean && nyc --reporter=html --reporter=lcov --reporter=text npm test",
     "fix": "prettier-standard index.js 'benchmark/**/*.js' 'example/**/*.js'",
     "lint": "standard index.js 'benchmark/**/*.js' 'example/**/*.js'",
     "test": "tape 'test/*.js'"
