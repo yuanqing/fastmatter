@@ -1,14 +1,12 @@
 # Fastmatter [![npm Version](http://img.shields.io/npm/v/fastmatter.svg?style=flat)](https://www.npmjs.org/package/fastmatter) [![Build Status](https://img.shields.io/travis/yuanqing/fastmatter.svg?branch=master&style=flat)](https://travis-ci.org/yuanqing/fastmatter) [![Coverage Status](https://img.shields.io/coveralls/yuanqing/fastmatter.svg?style=flat)](https://coveralls.io/github/yuanqing/fastmatter)
 
-> A faster frontmatter parser. Supports both string and stream inputs.
-
-Fastmatter is faster than the [front-matter](https://github.com/jxson/front-matter) module because fastmatter [does not use regular expressions](index.js).
+> A fast frontmatter parser. Supports both string and stream inputs.
 
 ## Usage
 
 Given a document `foo.md` containing YAML frontmatter and content:
 
-```
+```md
 ---
 title: Hello, World!
 tags: [ foo, bar, baz ]
@@ -35,7 +33,7 @@ fs.createReadStream('foo.md').pipe(
     this.pipe(
       concat(function (body) {
         console.log(body.toString())
-        //=> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        // => Lorem ipsum dolor sit amet consectetur adipisicing elit.
       })
     )
   })
@@ -73,7 +71,7 @@ fs.createReadStream('foo.md').pipe(
 ## API
 
 ```js
-const fastmatter = require('fastmatter');
+const fastmatter = require('fastmatter')
 ```
 
 ### fastmatter(string)
@@ -88,13 +86,13 @@ Calls `callback` with the parsed frontmatter `attributes`. The `this` context of
 
 Install via [yarn](https://yarnpkg.com):
 
-```bash
+```sh
 $ yarn add fastmatter
 ```
 
 Or [npm](https://npmjs.com):
 
-```bash
+```sh
 $ npm install --save fastmatter
 ```
 
