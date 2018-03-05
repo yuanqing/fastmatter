@@ -19,7 +19,6 @@
     "concat-stream": "^1.6.1",
     "front-matter": "^2.3.0",
     "glob": "^7.1.2",
-    "istanbul": "^0.4.5",
     "nyc": "^11.4.1",
     "prettier-standard": "^8.0.0",
     "standard": "^11.0.0",
