@@ -19,6 +19,8 @@
     "concat-stream": "^1.6.1",
     "front-matter": "^2.3.0",
     "glob": "^7.1.2",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.1.2",
     "nyc": "^11.4.1",
     "prettier-standard": "^8.0.0",
     "rimraf": "^2.6.2",
@@ -32,7 +34,14 @@
     "coverage": "yarn clean && nyc --reporter=html --reporter=lcov --reporter=text yarn test",
     "fix": "prettier-standard index.js 'benchmark/**/*.js' 'example/**/*.js'",
     "lint": "standard index.js 'benchmark/**/*.js' 'example/**/*.js'",
+    "precommit": "lint-staged",
     "test": "tape 'test/*.js'"
+  },
+  "lint-staged": {
+    "*.js": [
+      "standard",
+      "git add"
+    ]
   },
   "keywords": [
     "document",
