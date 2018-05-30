@@ -43,6 +43,9 @@
       "git add"
     ]
   },
+  "files": [
+    "index.js"
+  ],
   "keywords": [
     "document",
     "front-matter",
