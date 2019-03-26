@@ -31,7 +31,7 @@
   "scripts": {
     "benchmark": "node benchmark/index.js",
     "clean": "rimraf '*.log' .nyc_output coverage",
-    "coverage": "yarn clean && nyc --reporter=html --reporter=lcov --reporter=text yarn test",
+    "coverage": "yarn clean && nyc --reporter=html --reporter=lcov --reporter=text npm test",
     "fix": "prettier-standard index.js 'benchmark/**/*.js' 'example/**/*.js'",
     "lint": "standard index.js 'benchmark/**/*.js' 'example/**/*.js'",
     "test": "tape 'test/*.js'"
