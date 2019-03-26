@@ -1,6 +1,6 @@
 {
   "name": "fastmatter",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A fast frontmatter parser. Supports both string and stream inputs.",
   "author": "Lim Yuan Qing",
   "license": "MIT",
