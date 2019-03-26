@@ -34,7 +34,6 @@
     "coverage": "yarn clean && nyc --reporter=html --reporter=lcov --reporter=text yarn test",
     "fix": "prettier-standard index.js 'benchmark/**/*.js' 'example/**/*.js'",
     "lint": "standard index.js 'benchmark/**/*.js' 'example/**/*.js'",
-    "precommit": "lint-staged",
     "test": "tape 'test/*.js'"
   },
   "lint-staged": {
